@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Anti-Cookies Sheep</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <header class="top">
+    <div class="brand">
+      <img src="../icons/icon48.png" alt="" width="28" height="28">
+      <div>
+        <h1>Anti-Cookies Sheep</h1>
+        <p id="host" class="host">—</p>
+      </div>
+    </div>
+    <label class="switch" title="Attiva / disattiva su tutti i siti">
+      <input type="checkbox" id="master">
+      <span class="slider"></span>
+    </label>
+  </header>
+
+  <section class="stats">
+    <div class="stat">
+      <span class="num" id="s-cookies">0</span>
+      <span class="lbl">cookie bloccati</span>
+    </div>
+    <div class="stat">
+      <span class="num" id="s-headers">0</span>
+      <span class="lbl">header rimossi</span>
+    </div>
+    <div class="stat">
+      <span class="num" id="s-banners">0</span>
+      <span class="lbl">banner rifiutati</span>
+    </div>
+    <div class="stat">
+      <span class="num" id="s-fp">0</span>
+      <span class="lbl">fingerprint</span>
+    </div>
+  </section>
+
+  <section class="site">
+    <p class="section-title">Questo sito</p>
+    <div class="segmented" id="site-mode">
+      <button data-mode="default">Normale</button>
+      <button data-mode="allow">Consenti</button>
+      <button data-mode="block">Blocca tutto</button>
+    </div>
+    <p class="hint" id="site-hint"></p>
+  </section>
+
+  <section class="toggles">
+    <label class="row">
+      <span>Blocca cookie di terze parti</span>
+      <input type="checkbox" id="t-third">
+    </label>
+    <label class="row">
+      <span>Blocca tutti i cookie</span>
+      <input type="checkbox" id="t-all">
+    </label>
+    <label class="row">
+      <span>Blocca tracker e telemetria</span>
+      <input type="checkbox" id="t-trackers">
+    </label>
+    <label class="row">
+      <span>Anti-fingerprinting</span>
+      <input type="checkbox" id="t-fp">
+    </label>
+    <label class="row">
+      <span>Rifiuta i banner cookie</span>
+      <input type="checkbox" id="t-banners">
+    </label>
+  </section>
+
+  <section class="actions">
+    <button id="purge" class="btn primary">Pulisci cookie ora</button>
+    <button id="open-options" class="btn">Impostazioni</button>
+  </section>
+
+  <footer class="foot">
+    <span id="blocked-tab">0</span> blocchi in questa scheda
+  </footer>
+
+  <script src="popup.js"></script>
+</body>
+</html>
