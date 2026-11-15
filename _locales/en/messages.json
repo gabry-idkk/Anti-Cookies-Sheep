@@ -1,0 +1,9 @@
+{
+  "extName": {
+    "message": "Anti-Cookies Sheep",
+    "description": "Extension name"
+  },
+  "extDescription": {
+    "message": "Blocks third-party cookies, trackers, fingerprinting, CNAME cloaking and telemetry domains. Per-site settings, whitelist and live stats."
+  }
+}
