@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Anti-Cookies Sheep — blocco totale di cookie e tracker</title>
+  <meta name="description" content="Estensione Chrome (Manifest V3) che blocca cookie di terze parti, tracker, fingerprinting, CNAME cloaking e telemetria. Open source, nessun server.">
+  <link rel="icon" href="favicon.png">
+  <style>
+    :root {
+      --bg: #0b1116;
+      --card: #141d24;
+      --card2: #1a242d;
+      --line: #25323d;
+      --text: #e8eff5;
+      --muted: #8ea0ae;
+      --accent: #34d399;
+      --accent-dim: #0f3d2e;
+      --red: #f87171;
+      --mono: ui-monospace, "Cascadia Mono", "SF Mono", Menlo, monospace;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0; background: var(--bg); color: var(--text);
+      font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+      line-height: 1.6; -webkit-font-smoothing: antialiased;
+    }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    /* nav */
+    nav {
+      position: sticky; top: 0; z-index: 20;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 14px 26px; background: rgba(11,17,22,.85);
+      backdrop-filter: blur(12px); border-bottom: 1px solid var(--line);
+    }
+    nav .logo { display: flex; align-items: center; gap: 10px; font-weight: 700; letter-spacing: -.2px; }
+    nav .logo img { border-radius: 9px; }
+    nav .links { display: flex; gap: 22px; font-size: 14px; }
+    nav .links a { color: var(--muted); }
+    nav .links a:hover { color: var(--text); text-decoration: none; }
+
+    /* hero */
+    .hero {
+      max-width: 1080px; margin: 0 auto; padding: 84px 26px 60px;
+      display: grid; grid-template-columns: 1.15fr .85fr; gap: 52px; align-items: center;
+    }
+    .pill {
+      display: inline-flex; align-items: center; gap: 8px; font-size: 12.5px;
+      background: var(--accent-dim); color: var(--accent); border: 1px solid #1d6b52;
+      padding: 5px 12px; border-radius: 999px; margin-bottom: 22px; font-weight: 600;
+    }
+    .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 0 3px rgba(52,211,153,.18); }
+    h1 { font-size: clamp(34px, 5vw, 56px); line-height: 1.05; letter-spacing: -1.6px; margin: 0 0 20px; }
+    h1 span { color: var(--accent); }
+    .lead { font-size: 18px; color: var(--muted); max-width: 520px; margin: 0 0 30px; }
+    .cta { display: flex; gap: 12px; flex-wrap: wrap; }
+    .btn {
+      display: inline-flex; align-items: center; gap: 9px; padding: 13px 22px;
+      border-radius: 12px; font-weight: 650; font-size: 15px; border: 1px solid transparent;
+      transition: transform .15s, background .15s, border-color .15s;
+    }
+    .btn:active { transform: translateY(1px); }
+    .btn.primary { background: var(--accent); color: #06231a; }
+    .btn.primary:hover { background: #4ade9f; text-decoration: none; }
+    .btn.ghost { background: transparent; border-color: var(--line); color: var(--text); }
+    .btn.ghost:hover { border-color: #3a4b58; background: var(--card2); text-decoration: none; }
+    .meta { margin-top: 18px; font-size: 13px; color: var(--muted); }
+
+    /* live panel */
+    .panel {
+      background: linear-gradient(160deg, var(--card2), var(--card));
+      border: 1px solid var(--line); border-radius: 18px; padding: 22px;
+      box-shadow: 0 24px 60px -30px rgba(0,0,0,.9);
+    }
+    .panel h3 { margin: 0 0 4px; font-size: 14px; }
+    .panel p.sub { margin: 0 0 18px; font-size: 12.5px; color: var(--muted); }
+    .row {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 10px 0; border-bottom: 1px solid #1e2831; font-size: 13.5px;
+    }
+    .row:last-of-type { border-bottom: 0; }
+    .tag { font-family: var(--mono); font-size: 11.5px; padding: 2px 8px; border-radius: 6px; }
+    .tag.ok { background: var(--accent-dim); color: var(--accent); }
+    .tag.bad { background: #3d1a1a; color: var(--red); }
+    .tag.warn { background: #3d311a; color: #fbbf24; }
+    .count { font-family: var(--mono); font-weight: 700; color: var(--accent); }
+    .panel .foot { margin-top: 14px; font-size: 11.5px; color: var(--muted); }
+
+    /* sections */
+    section.block { max-width: 1080px; margin: 0 auto; padding: 70px 26px; }
+    .eyebrow { font-size: 12px; text-transform: uppercase; letter-spacing: 1.4px; color: var(--accent); font-weight: 700; margin-bottom: 12px; }
+    h2 { font-size: clamp(26px, 3.4vw, 38px); letter-spacing: -.8px; margin: 0 0 14px; }
+    .section-lead { color: var(--muted); max-width: 640px; margin: 0 0 40px; font-size: 16.5px; }
+
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; }
+    .feature {
+      background: var(--card); border: 1px solid var(--line); border-radius: 16px; padding: 22px;
+      transition: border-color .18s, transform .18s;
+    }
+    .feature:hover { border-color: #35505f; transform: translateY(-2px); }
+    .feature .ico { font-size: 22px; margin-bottom: 12px; }
+    .feature h4 { margin: 0 0 6px; font-size: 15.5px; }
+    .feature p { margin: 0; font-size: 13.5px; color: var(--muted); }
+    .feature code { font-family: var(--mono); font-size: 12px; color: #a5b4c0; }
+
+    /* steps */
+    .steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 18px; counter-reset: s; }
+    .step { background: var(--card); border: 1px solid var(--line); border-radius: 16px; padding: 24px 22px; position: relative; }
+    .step::before {
+      counter-increment: s; content: counter(s);
+      position: absolute; top: -14px; left: 22px; width: 30px; height: 30px; border-radius: 50%;
+      background: var(--accent); color: #06231a; display: grid; place-items: center; font-weight: 800; font-size: 14px;
+    }
+    .step h4 { margin: 10px 0 6px; font-size: 15px; }
+    .step p { margin: 0; font-size: 13.5px; color: var(--muted); }
+    kbd {
+      font-family: var(--mono); font-size: 12px; background: var(--card2);
+      border: 1px solid var(--line); border-radius: 6px; padding: 2px 6px;
+    }
+
+    /* table */
+    table { width: 100%; border-collapse: collapse; font-size: 14px; }
+    th, td { text-align: left; padding: 12px 14px; border-bottom: 1px solid var(--line); vertical-align: top; }
+    th { color: var(--muted); font-size: 12px; text-transform: uppercase; letter-spacing: .8px; font-weight: 700; }
+    td code { font-family: var(--mono); font-size: 12.5px; color: var(--accent); }
+    tbody tr:hover { background: var(--card); }
+
+    /* faq */
+    details {
+      background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+      padding: 16px 20px; margin-bottom: 10px;
+    }
+    details summary { cursor: pointer; font-weight: 600; font-size: 15px; list-style: none; display: flex; justify-content: space-between; gap: 12px; }
+    details summary::-webkit-details-marker { display: none; }
+    details summary::after { content: "+"; color: var(--accent); font-size: 20px; line-height: 1; }
+    details[open] summary::after { content: "−"; }
+    details p { color: var(--muted); font-size: 14px; margin: 12px 0 0; }
+
+    footer {
+      border-top: 1px solid var(--line); padding: 34px 26px; text-align: center;
+      color: var(--muted); font-size: 13px;
+    }
+
+    @media (max-width: 860px) {
+      .hero { grid-template-columns: 1fr; padding-top: 54px; }
+      nav .links { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="logo"><img src="favicon.png" width="26" height="26" alt=""> Anti-Cookies Sheep</div>
+  <div class="links">
+    <a href="#funzioni">Funzioni</a>
+    <a href="#installa">Installa</a>
+    <a href="#come">Come funziona</a>
+    <a href="#faq">FAQ</a>
+    <a href="https://github.com/gabry-idkk/Anti-Cookies-Sheep" target="_blank" rel="noopener">GitHub ↗</a>
+  </div>
+</nav>
+
+<div class="hero">
+  <div>
+    <span class="pill"><span class="dot"></span> Open source · Manifest V3 · zero server</span>
+    <h1>I tuoi cookie<br>restano <span>tuoi</span>.</h1>
+    <p class="lead">
+      Blocca cookie di terze parti, tracker pubblicitari, fingerprinting, CNAME cloaking e
+      telemetria su <strong>ogni</strong> sito. Rifiuta i banner da solo, pulisce i link dai
+      parametri di tracciamento e non manda un singolo byte a nessun server.
+    </p>
+    <div class="cta">
+      <a class="btn primary" href="https://github.com/gabry-idkk/Anti-Cookies-Sheep" target="_blank" rel="noopener">★ Repository su GitHub</a>
+      <a class="btn ghost" href="#installa">Come installarla</a>
+    </div>
+    <p class="meta">Funziona su Chrome, Edge, Brave, Opera, Vivaldi · Chromium 120+ · licenza MIT</p>
+  </div>
+
+  <div class="panel">
+    <h3>Test dal vivo sul tuo browser</h3>
+    <p class="sub">Stato reale della tua sessione, adesso.</p>
+    <div class="row"><span>Cookie di terze parti</span><span class="tag" id="t-third">verifica…</span></div>
+    <div class="row"><span>Do Not Track</span><span class="tag" id="t-dnt">verifica…</span></div>
+    <div class="row"><span>Global Privacy Control</span><span class="tag" id="t-gpc">verifica…</span></div>
+    <div class="row"><span>Cookie già presenti</span><span class="count" id="t-count">—</span></div>
+    <div class="row"><span>Tracking link nell'URL</span><span class="tag" id="t-url">—</span></div>
+    <div class="row"><span>Canvas fingerprint</span><span class="tag" id="t-canvas">—</span></div>
+    <p class="foot" id="t-note">Installando l'estensione questi valori cambiano: ricarica la pagina dopo l'installazione.</p>
+  </div>
+</div>
+
+<section class="block" id="funzioni">
+  <p class="eyebrow">Cosa blocca</p>
+  <h2>Sei strati di difesa, non un solo toggle.</h2>
+  <p class="section-lead">
+    Un blocco fatto bene non è "blocca tutto": è bloccare il tracciamento senza rompere il sito.
+    Ogni protezione è indipendente e configurabile per singolo dominio.
+  </p>
+
+  <div class="grid">
+    <div class="feature"><div class="ico">🍪</div><h4>Cookie</h4><p>Terze parti, tutti i cookie, solo sessione, rimozione immediata dei cookie riscritti dopo il blocco, pulizia alla chiusura della scheda.</p></div>
+    <div class="feature"><div class="ico">📡</div><h4>Tracker di rete</h4><p>139 regole DNR integrate: DoubleClick, Google Ads, Meta, TikTok, LinkedIn, Criteo, Taboola, reti programmatiche, error reporting e session recording.</p></div>
+    <div class="feature"><div class="ico">🧬</div><h4>Fingerprinting</h4><p>Rumore deterministico su canvas e audio, WebGL debug info rimosso, font limitati, schermo e hardware normalizzati, WebRTC senza IP locale.</p></div>
+    <div class="feature"><div class="ico">🛰️</div><h4>Header e link</h4><p><code>X-Client-Data</code> e client hint rimossi, Referer ridotto all'origine, <code>Set-Cookie</code> di terze parti cancellati, <code>fbclid</code>/<code>gclid</code>/<code>utm_*</code> via dai link.</p></div>
+    <div class="feature"><div class="ico">🚫</div><h4>Banner cookie</h4><p>Clic automatico su "Rifiuta tutto" per OneTrust, Cookiebot, Iubenda, Didomi, Usercentrics, Complianz, CookieYes, Quantcast, Osano, Klaro, TrustArc.</p></div>
+    <div class="feature"><div class="ico">🔒</div><h4>Modalità estrema</h4><p>Per i domini ostili: localStorage, IndexedDB, Cache API e service worker disattivati. Whitelist e blacklist per dominio.</p></div>
+  </div>
+</section>
+
+<section class="block" id="installa">
+  <p class="eyebrow">Installazione</p>
+  <h2>Quattro passaggi, trenta secondi.</h2>
+  <p class="section-lead">L'estensione non è sul Chrome Web Store: si carica in modalità sviluppatore, senza intermediari e senza revisione di terzi.</p>
+
+  <div class="steps">
+    <div class="step"><h4>Scarica il codice</h4><p>Clona la repo o scarica lo ZIP:<br><kbd>git clone https://github.com/gabry-idkk/Anti-Cookies-Sheep</kbd></p></div>
+    <div class="step"><h4>Apri le estensioni</h4><p>Vai su <kbd>chrome://extensions</kbd> (Edge: <kbd>edge://extensions</kbd>).</p></div>
+    <div class="step"><h4>Modalità sviluppatore</h4><p>Attiva l'interruttore in alto a destra.</p></div>
+    <div class="step"><h4>Carica la cartella</h4><p>“Carica estensione non pacchettizzata” → seleziona la cartella del progetto. Fine.</p></div>
+  </div>
+</section>
+
+<section class="block" id="come">
+  <p class="eyebrow">Come funziona</p>
+  <h2>Il blocco avviene prima che il tracker esista.</h2>
+  <p class="section-lead">Ogni strato lavora in un momento diverso del ciclo di vita della pagina.</p>
+
+  <table>
+    <thead><tr><th>Strato</th><th>Momento</th><th>Cosa fa</th></tr></thead>
+    <tbody>
+      <tr><td><code>declarativeNetRequest</code></td><td>prima della richiesta</td><td>Blocca i domini noti a livello di rete: nessun JavaScript eseguito, nessuna latenza.</td></tr>
+      <tr><td><code>webRequest</code> (blocking)</td><td>durante la richiesta</td><td>Rimuove header di tracking in uscita e <code>Set-Cookie</code> di terze parti in entrata.</td></tr>
+      <tr><td><code>cookies.onChanged</code></td><td>appena creato</td><td>Rete di sicurezza: ogni cookie bloccato reimpostato viene cancellato in pochi millisecondi.</td></tr>
+      <tr><td><code>inject.js</code></td><td><code>document_start</code>, main world</td><td>Neutralizza canvas, WebGL, audio, font, WebRTC, Topics API prima degli script del sito.</td></tr>
+      <tr><td><code>content.js</code></td><td>DOM pronto</td><td>Rifiuta i banner CMP, pulisce link e risorse, segnala i blocchi al contatore.</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<section class="block" id="faq">
+  <p class="eyebrow">Domande</p>
+  <h2>Le cose che chiedono tutti.</h2>
+
+  <details open><summary>Mi farà sloggiare ovunque?</summary><p>No, se usi la modalità predefinita: blocca i cookie di <em>terze parti</em> e lascia quelli di prima parte, che servono al login. Se un sito si rompe, mettilo in whitelist dal popup: il blocco si spegne solo lì.</p></details>
+  <details><summary>Serve un account o un server?</summary><p>No. Non c'è backend, non c'è telemetria, non ci sono liste scaricate da remoto. Le regole sono nel pacchetto dell'estensione e le puoi leggere in <code>src/rules/</code>.</p></details>
+  <details><summary>Blocca anche i cookie di prima parte?</summary><p>Solo se attivi "Blocca tutti i cookie" o metti il sito in blacklist. In quel caso la sessione vive finché la pagina è aperta e i login non funzionano: è una scelta, non un effetto collaterale.</p></details>
+  <details><summary>L'anti-fingerprinting romperà i siti?</summary><p>Raramente. Il rumore è minimo (±1 sui canali colore), deterministico per host e invisibile a occhio. I siti che usano canvas per disegnare grafici funzionano; quelli che lo usano per identificarti ottengono un valore inutile.</p></details>
+  <details><summary>Funziona su Firefox o Safari?</summary><p>No: usa API Manifest V3 di Chromium (<code>declarativeNetRequest</code>, <code>webRequest</code> blocking, <code>chrome.cookies</code>). Firefox ha API diverse.</p></details>
+  <details><summary>È legale?</summary><p>Sì. Bloccare il tracciamento è una scelta dell'utente, e l'estensione invia anche il segnale Global Privacy Control, che il GDPR e il CCPA riconoscono come richiesta di non vendita/condivisione dei dati.</p></details>
+</section>
+
+<footer>
+  <p>Anti-Cookies Sheep · MIT · <a href="https://github.com/gabry-idkk/Anti-Cookies-Sheep" target="_blank" rel="noopener">github.com/gabry-idkk/Anti-Cookies-Sheep</a></p>
+  <p style="font-size:12px">Nessun cookie è stato creato per costruire questa pagina. Sul serio: zero.</p>
+</footer>
+
+<script>
+  /* ---------- test dal vivo, solo API del browser ---------- */
+
+  const setTag = (id, text, cls) => {
+    const el = document.getElementById(id);
+    el.textContent = text;
+    el.className = 'tag ' + cls;
+  };
+
+  // 1. Do Not Track
+  const dnt = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+  setTag('t-dnt', dnt === '1' || dnt === 'yes' ? 'attivo' : 'non inviato', dnt === '1' || dnt === 'yes' ? 'ok' : 'bad');
+
+  // 2. Cookie esistenti
+  const cookies = document.cookie ? document.cookie.split(';').filter(Boolean) : [];
+  document.getElementById('t-count').textContent = cookies.length === 0 ? '0' : String(cookies.length);
+  setTag('t-third', 'non rilevabile dal sito', 'warn');
+
+  // 3. Global Privacy Control (header non leggibile da JS: verifichiamo via fetch a un endpoint locale)
+  setTag('t-gpc', 'header: controlla nei DevTools', 'warn');
+
+  // 4. Parametri di tracking nell'URL
+  const params = ['fbclid','gclid','msclkid','ttclid','utm_source','utm_medium','utm_campaign'];
+  const found = params.filter((p) => new URLSearchParams(location.search).has(p));
+  if (found.length) setTag('t-url', found.join(', '), 'bad');
+  else setTag('t-url', 'nessuno', 'ok');
+
+  // 5. Canvas fingerprint (hash semplice)
+  try {
+    const c = document.createElement('canvas');
+    c.width = 200; c.height = 40;
+    const ctx = c.getContext('2d');
+    ctx.textBaseline = 'top';
+    ctx.font = '16px Arial';
+    ctx.fillStyle = '#f60';
+    ctx.fillRect(0, 0, 200, 40);
+    ctx.fillStyle = '#069';
+    ctx.fillText('Anti-Cookies Sheep 🐑', 2, 8);
+    const data = c.toDataURL();
+    let h = 0;
+    for (let i = 0; i < data.length; i++) h = (h * 31 + data.charCodeAt(i)) | 0;
+    const hash = (h >>> 0).toString(16).padStart(8, '0');
+    setTag('t-canvas', hash, 'warn');
+    document.getElementById('t-note').textContent =
+      'Con l\'estensione attiva questo hash cambia in base al sito: non è più un identificatore stabile.';
+  } catch {
+    setTag('t-canvas', 'bloccato', 'ok');
+  }
+
+  // 6. Segnale dell'estensione, se presente
+  if (window.__acs_installed__) {
+    document.getElementById('t-note').textContent = '🐑 Anti-Cookies Sheep è attiva su questa pagina.';
+  }
+</script>
+
+</body>
+</html>
