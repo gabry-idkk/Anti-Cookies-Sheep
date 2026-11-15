@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Anti-Cookies Sheep — Impostazioni</title>
+  <link rel="stylesheet" href="options.css">
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div class="brand">
+        <img src="../icons/icon128.png" alt="" width="44" height="44">
+        <div>
+          <h1>Anti-Cookies Sheep</h1>
+          <p class="sub">Blocco totale di cookie, tracker, fingerprinting e telemetria. Tutto in locale: nessun dato esce dal browser.</p>
+        </div>
+      </div>
+      <label class="switch">
+        <input type="checkbox" id="master">
+        <span class="slider"></span>
+      </label>
+    </header>
+
+    <section class="card">
+      <h2>Cookie</h2>
+      <label class="row"><span>Blocca cookie di terze parti<small>Cookie impostati da domini diversi dal sito che stai visitando.</small></span><input type="checkbox" data-key="blockThirdPartyCookies"></label>
+      <label class="row"><span>Blocca tutti i cookie<small>Nessun cookie viene salvato. I login non funzioneranno: le sessioni restano attive solo finché la pagina è aperta.</small></span><input type="checkbox" data-key="blockAllCookies"></label>
+      <label class="row"><span>Solo cookie di sessione<small>Vieta i cookie persistenti (scadenza futura), consente quelli di sessione.</small></span><input type="checkbox" data-key="sessionCookiesOnly"></label>
+      <label class="row"><span>Cancella i cookie alla chiusura della scheda<small>Rimuove i cookie creati durante la visita.</small></span><input type="checkbox" data-key="autoClearOnClose"></label>
+      <label class="row"><span>Pulizia all'avvio del browser<small>Rimuove tutti i cookie bloccati ogni volta che apri Chrome.</small></span><input type="checkbox" data-key="clearOnStartup"></label>
+    </section>
+
+    <section class="card">
+      <h2>Reti e tracker</h2>
+      <label class="row"><span>Blocca tracker pubblicitari<small>Lista integrata di 90+ domini: DoubleClick, Google Ads, Meta, TikTok, Criteo, Taboola, reti programmatiche…</small></span><input type="checkbox" data-key="blockTrackers"></label>
+      <label class="row"><span>Blocca domini di telemetria<small>Error reporting e analytics: Sentry, Datadog, Hotjar, LogRocket, Segment, Amplitude…</small></span><input type="checkbox" data-key="blockTelemetry"></label>
+      <label class="row"><span>Blocca beacon e ping<small>I pixel invisibili usati per tracciare le visualizzazioni.</small></span><input type="checkbox" data-key="blockBeacons"></label>
+      <label class="row"><span>Rimuovi header di tracking<small>Referer ridotto all'origine, X-Client-Data, client hint ad alta entropia, parametri fbclid/gclid dai link.</small></span><input type="checkbox" data-key="stripTrackingHeaders"></label>
+      <label class="row"><span>Global Privacy Control (GPC)<small>Invia Sec-GPC: 1, il segnale legale riconosciuto dal GDPR in California e in Europa.</small></span><input type="checkbox" data-key="gpc"></label>
+      <label class="row"><span>Do Not Track (DNT)<small>Invia DNT: 1 a ogni richiesta.</small></span><input type="checkbox" data-key="dnt"></label>
+    </section>
+
+    <section class="card">
+      <h2>Fingerprinting</h2>
+      <label class="row"><span>Anti-fingerprinting<small>Canvas, WebGL, AudioContext, font, schermo, WebRTC (niente IP locale), hardware concurrency.</small></span><input type="checkbox" data-key="blockFingerprinting"></label>
+      <label class="row"><span>Blocca client hints ad alta entropia<small>Impedisce di leggere versione esatta del sistema, modello CPU e GPU.</small></span><input type="checkbox" data-key="blockClientHints"></label>
+      <label class="row"><span>Blocca Topics API / FLoC<small>Impedisce al browser di condividere i tuoi interessi con i siti.</small></span><input type="checkbox" data-key="blockFloc"></label>
+      <label class="row danger"><span>Blocca localStorage / IndexedDB<small>Può rompere i siti: usalo solo su domini ostili.</small></span><input type="checkbox" data-key="blockStorage"></label>
+      <label class="row danger"><span>Blocca service worker<small>Impedisce cache e script persistenti: alcuni siti non funzioneranno.</small></span><input type="checkbox" data-key="blockServiceWorkers"></label>
+    </section>
+
+    <section class="card">
+      <h2>Banner cookie</h2>
+      <label class="row"><span>Rifiuta automaticamente i banner<small>Clicca "Rifiuta tutto" sui CMP più diffusi: OneTrust, Cookiebot, Iubenda, Didomi, Usercentrics, Complianz, CookieYes, Quantcast.</small></span><input type="checkbox" data-key="autoRejectBanners"></label>
+      <label class="row"><span>Nascondi i banner rimasti<small>CSS che rimuove i popup di consenso non riconosciuti.</small></span><input type="checkbox" data-key="hideBanners"></label>
+    </section>
+
+    <section class="card">
+      <h2>Liste per sito</h2>
+      <div class="lists">
+        <div class="list-block">
+          <h3>Whitelist <small>blocco disattivato</small></h3>
+          <div class="chips" id="whitelist"></div>
+          <div class="add">
+            <input type="text" id="wl-input" placeholder="esempio.com">
+            <button class="btn" id="wl-add">Aggiungi</button>
+          </div>
+        </div>
+        <div class="list-block">
+          <h3>Blacklist <small>massima protezione</small></h3>
+          <div class="chips" id="blacklist"></div>
+          <div class="add">
+            <input type="text" id="bl-input" placeholder="esempio.com">
+            <button class="btn" id="bl-add">Aggiungi</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>Statistiche</h2>
+      <div class="stats-grid">
+        <div class="stat"><span class="num" id="g-cookies">0</span><span class="lbl">cookie bloccati</span></div>
+        <div class="stat"><span class="num" id="g-headers">0</span><span class="lbl">header rimossi</span></div>
+        <div class="stat"><span class="num" id="g-banners">0</span><span class="lbl">banner rifiutati</span></div>
+        <div class="stat"><span class="num" id="g-fp">0</span><span class="lbl">fingerprint bloccati</span></div>
+      </div>
+      <h3 class="small-title">Domini più attivi</h3>
+      <ul class="top-domains" id="top-domains"><li class="empty">Nessun dato ancora.</li></ul>
+    </section>
+
+    <section class="card">
+      <h2>Azioni</h2>
+      <div class="actions">
+        <button class="btn" id="purge">Pulisci tutti i cookie</button>
+        <button class="btn" id="wipe">Cancella dati di navigazione</button>
+        <button class="btn ghost" id="reset">Ripristina impostazioni</button>
+      </div>
+      <p class="note" id="status"></p>
+    </section>
+
+    <footer>
+      <p>Anti-Cookies Sheep · nessun server, nessun telemetria, nessuna richiesta di rete. <span id="version"></span></p>
+    </footer>
+  </div>
+
+  <script src="options.js"></script>
+</body>
+</html>
