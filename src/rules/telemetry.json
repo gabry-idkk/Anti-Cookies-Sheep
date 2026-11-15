@@ -1,0 +1,896 @@
+[
+  {
+    "id": 1,
+    "priority": 1,
+    "action": {
+      "type": "block"
+    },
+    "condition": {
+      "urlFilter": "||google-analytics.com^",
+      "resourceTypes": [
+        "script",
+        "image",
+        "xmlhttprequest",
+        "sub_frame",
+        "ping",
+        "media",
+        "other",
+        "stylesheet",
+        "font",
+        "websocket"
+      ]
+    }
+  },
+  {
+    "id": 2,
+    "priority": 1,
+    "action": {
+      "type": "block"
+    },
+    "condition": {
+      "urlFilter": "||googletagmanager.com^",
+      "resourceTypes": [
+        "script",
+        "image",
+        "xmlhttprequest",
+        "sub_frame",
+        "ping",
+        "media",
+        "other",
+        "stylesheet",
+        "font",
+        "websocket"
+      ]
+    }
+  },
+  {
+    "id": 3,
+    "priority": 1,
+    "action": {
+      "type": "block"
+    },
+    "condition": {
+      "urlFilter": "||api.segment.io^",
+      "resourceTypes": [
+        "script",
+        "image",
+        "xmlhttprequest",
+        "sub_frame",
+        "ping",
+        "media",
+        "other",
+        "stylesheet",
+        "font",
+        "websocket"
+      ]
+    }
+  },
+  {
+    "id": 4,
+    "priority": 1,
+    "action": {
+      "type": "block"
+    },
+    "condition": {
+      "urlFilter": "||browser-intake-datadoghq.com^",
+      "resourceTypes": [
+        "xmlhttprequest",
+        "ping",
+        "script",
+        "image",
+        "sub_frame",
+        "other"
+      ]
+    }
+  },
+  {
+    "id": 5,
+    "priority": 1,
+    "action": {
+      "type": "block"
+    },
+    "condition": {
+      "urlFilter": "||sentry.io^",
+      "resourceTypes": [
+        "xmlhttprequest",
+        "ping",
+        "script",
+        "image",
+        "sub_frame",
+        "other"
+      ]
+    }
+  },
+  {
+    "id": 6,
+    "priority": 1,
+    "action": {
+      "type": "block"
+    },
+    "condition": {
+      "urlFilter": "||bugsnag.com^",
+      "resourceTypes": [
+        "xmlhttprequest",
+        "ping",
+        "script",
+        "image",
+        "sub_frame",
+        "other"
+      ]
+    }
+  },
+  {
+    "id": 7,
+    "priority": 1,
+    "action": {
+      "type": "block"
+    },
+    "condition": {
+      "urlFilter": "||rollbar.com^",
+      "resourceTypes": [
+        "xmlhttprequest",
+        "ping",
+        "script",
+        "image",
+        "sub_frame",
+        "other"
+      ]
+    }
+  },
+  {
+    "id": 8,
+    "priority": 1,
+    "action": {
+      "type": "block"
+    },
+    "condition": {
+      "urlFilter": "||newrelic.com^",
+      "resourceTypes": [
+        "xmlhttprequest",
+        "ping",
+        "script",
+        "image",
+        "sub_frame",
+        "other"
+      ]
+    }
+  },
+  {
+    "id": 9,
+    "priority": 1,
+    "action": {
+      "type": "block"
+    },
+    "condition": {
+      "urlFilter": "||nr-data.net^",
+      "resourceTypes": [
+        "xmlhttprequest",
+        "ping",
+        "script",
+        "image",
+        "sub_frame",
+        "other"
+      ]
+    }
+  },
+  {
+    "id": 10,
+    "priority": 1,
+    "action": {
+      "type": "block"
+    },
+    "condition": {
+      "urlFilter": "||loggly.com^",
+      "resourceTypes": [
+        "xmlhttprequest",
+        "ping",
+        "script",
+        "image",
+        "sub_frame",
+        "other"
+      ]
+    }
+  },
+  {
+    "id": 11,
+    "priority": 1,
+    "action": {
+      "type": "block"
+    },
+    "condition": {
+      "urlFilter": "||logrocket.com^",
+      "resourceTypes": [
+        "xmlhttprequest",
+        "ping",
+        "script",
+        "image",
+        "sub_frame",
+        "other"
+      ]
+    }
+  },
+  {
+    "id": 12,
+    "priority": 1,
+    "action": {
+      "type": "block"
+    },
+    "condition": {
+      "urlFilter": "||lr-ingest.io^",
+      "resourceTypes": [
+        "xmlhttprequest",
+        "ping",
+        "script",
+        "image",
+        "sub_frame",
+        "other"
+      ]
+    }
+  },
+  {
+    "id": 13,
+    "priority": 1,
+    "action": {
+      "type": "block"
+    },
+    "condition": {
+      "urlFilter": "||stats.wp.com^",
+      "resourceTypes": [
+        "script",
+        "image",
+        "xmlhttprequest",
+        "ping",
+        "sub_frame",
+        "other"
+      ]
+    }
+  },
+  {
+    "id": 14,
+    "priority": 1,
+    "action": {
+      "type": "block"
+    },
+    "condition": {
+      "urlFilter": "||pixel.wp.com^",
+      "resourceTypes": [
+        "script",
+        "image",
+        "xmlhttprequest",
+        "ping",
+        "sub_frame",
+        "other"
+      ]
+    }
+  },
+  {
+    "id": 15,
+    "priority": 1,
+    "action": {
+      "type": "block"
+    },
+    "condition": {
+      "urlFilter": "||posthog.com^",
+      "resourceTypes": [
+        "script",
+        "image",
+        "xmlhttprequest",
+        "ping",
+        "sub_frame",
+        "other"
+      ]
+    }
+  },
+  {
+    "id": 16,
+    "priority": 1,
+    "action": {
+      "type": "block"
+    },
+    "condition": {
+      "urlFilter": "||plausible.io^",
+      "resourceTypes": [
+        "script",
+        "image",
+        "xmlhttprequest",
+        "ping",
+        "sub_frame",
+        "other"
+      ]
+    }
+  },
+  {
+    "id": 17,
+    "priority": 1,
+    "action": {
+      "type": "block"
+    },
+    "condition": {
+      "urlFilter": "||umami.is^",
+      "resourceTypes": [
+        "script",
+        "image",
+        "xmlhttprequest",
+        "ping",
+        "sub_frame",
+        "other"
+      ]
+    }
+  },
+  {
+    "id": 18,
+    "priority": 1,
+    "action": {
+      "type": "block"
+    },
+    "condition": {
+      "urlFilter": "||statcounter.com^",
+      "resourceTypes": [
+        "script",
+        "image",
+        "xmlhttprequest",
+        "ping",
+        "sub_frame",
+        "other"
+      ]
+    }
+  },
+  {
+    "id": 19,
+    "priority": 1,
+    "action": {
+      "type": "block"
+    },
+    "condition": {
+      "urlFilter": "||histats.com^",
+      "resourceTypes": [
+        "script",
+        "image",
+        "xmlhttprequest",
+        "ping",
+        "sub_frame",
+        "other"
+      ]
+    }
+  },
+  {
+    "id": 20,
+    "priority": 1,
+    "action": {
+      "type": "block"
+    },
+    "condition": {
+      "urlFilter": "||clicky.com^",
+      "resourceTypes": [
+        "script",
+        "image",
+        "xmlhttprequest",
+        "ping",
+        "sub_frame",
+        "other"
+      ]
+    }
+  },
+  {
+    "id": 21,
+    "priority": 1,
+    "action": {
+      "type": "block"
+    },
+    "condition": {
+      "urlFilter": "||getclicky.com^",
+      "resourceTypes": [
+        "script",
+        "image",
+        "xmlhttprequest",
+        "ping",
+        "sub_frame",
+        "other"
+      ]
+    }
+  },
+  {
+    "id": 22,
+    "priority": 1,
+    "action": {
+      "type": "block"
+    },
+    "condition": {
+      "urlFilter": "||chartbeat.com^",
+      "resourceTypes": [
+        "script",
+        "image",
+        "xmlhttprequest",
+        "ping",
+        "sub_frame",
+        "other"
+      ]
+    }
+  },
+  {
+    "id": 23,
+    "priority": 1,
+    "action": {
+      "type": "block"
+    },
+    "condition": {
+      "urlFilter": "||chartbeat.net^",
+      "resourceTypes": [
+        "script",
+        "image",
+        "xmlhttprequest",
+        "ping",
+        "sub_frame",
+        "other"
+      ]
+    }
+  },
+  {
+    "id": 24,
+    "priority": 1,
+    "action": {
+      "type": "block"
+    },
+    "condition": {
+      "urlFilter": "||parsely.com^",
+      "resourceTypes": [
+        "script",
+        "image",
+        "xmlhttprequest",
+        "ping",
+        "sub_frame",
+        "other"
+      ]
+    }
+  },
+  {
+    "id": 25,
+    "priority": 1,
+    "action": {
+      "type": "block"
+    },
+    "condition": {
+      "urlFilter": "||atlassian.com/analytics^",
+      "resourceTypes": [
+        "script",
+        "image",
+        "xmlhttprequest",
+        "ping",
+        "sub_frame",
+        "other"
+      ]
+    }
+  },
+  {
+    "id": 26,
+    "priority": 1,
+    "action": {
+      "type": "block"
+    },
+    "condition": {
+      "urlFilter": "||instana.io^",
+      "resourceTypes": [
+        "xmlhttprequest",
+        "ping",
+        "script",
+        "image",
+        "sub_frame",
+        "other"
+      ]
+    }
+  },
+  {
+    "id": 27,
+    "priority": 1,
+    "action": {
+      "type": "block"
+    },
+    "condition": {
+      "urlFilter": "||appdynamics.com^",
+      "resourceTypes": [
+        "xmlhttprequest",
+        "ping",
+        "script",
+        "image",
+        "sub_frame",
+        "other"
+      ]
+    }
+  },
+  {
+    "id": 28,
+    "priority": 1,
+    "action": {
+      "type": "block"
+    },
+    "condition": {
+      "urlFilter": "||dynatrace.com^",
+      "resourceTypes": [
+        "xmlhttprequest",
+        "ping",
+        "script",
+        "image",
+        "sub_frame",
+        "other"
+      ]
+    }
+  },
+  {
+    "id": 29,
+    "priority": 1,
+    "action": {
+      "type": "block"
+    },
+    "condition": {
+      "urlFilter": "||raygun.io^",
+      "resourceTypes": [
+        "xmlhttprequest",
+        "ping",
+        "script",
+        "image",
+        "sub_frame",
+        "other"
+      ]
+    }
+  },
+  {
+    "id": 30,
+    "priority": 1,
+    "action": {
+      "type": "block"
+    },
+    "condition": {
+      "urlFilter": "||trackjs.com^",
+      "resourceTypes": [
+        "xmlhttprequest",
+        "ping",
+        "script",
+        "image",
+        "sub_frame",
+        "other"
+      ]
+    }
+  },
+  {
+    "id": 31,
+    "priority": 1,
+    "action": {
+      "type": "block"
+    },
+    "condition": {
+      "urlFilter": "||airbrake.io^",
+      "resourceTypes": [
+        "xmlhttprequest",
+        "ping",
+        "script",
+        "image",
+        "sub_frame",
+        "other"
+      ]
+    }
+  },
+  {
+    "id": 32,
+    "priority": 1,
+    "action": {
+      "type": "block"
+    },
+    "condition": {
+      "urlFilter": "||datadoghq.com^",
+      "resourceTypes": [
+        "xmlhttprequest",
+        "ping",
+        "script",
+        "image",
+        "sub_frame",
+        "other"
+      ]
+    }
+  },
+  {
+    "id": 33,
+    "priority": 1,
+    "action": {
+      "type": "block"
+    },
+    "condition": {
+      "urlFilter": "||hotjar.io^",
+      "resourceTypes": [
+        "script",
+        "image",
+        "xmlhttprequest",
+        "ping",
+        "sub_frame",
+        "other"
+      ]
+    }
+  },
+  {
+    "id": 34,
+    "priority": 1,
+    "action": {
+      "type": "block"
+    },
+    "condition": {
+      "urlFilter": "||inspectlet.com^",
+      "resourceTypes": [
+        "script",
+        "image",
+        "xmlhttprequest",
+        "ping",
+        "sub_frame",
+        "other"
+      ]
+    }
+  },
+  {
+    "id": 35,
+    "priority": 1,
+    "action": {
+      "type": "block"
+    },
+    "condition": {
+      "urlFilter": "||luckyorange.com^",
+      "resourceTypes": [
+        "script",
+        "image",
+        "xmlhttprequest",
+        "ping",
+        "sub_frame",
+        "other"
+      ]
+    }
+  },
+  {
+    "id": 36,
+    "priority": 1,
+    "action": {
+      "type": "block"
+    },
+    "condition": {
+      "urlFilter": "||qualtrics.com^",
+      "resourceTypes": [
+        "script",
+        "image",
+        "xmlhttprequest",
+        "ping",
+        "sub_frame",
+        "other"
+      ]
+    }
+  },
+  {
+    "id": 37,
+    "priority": 1,
+    "action": {
+      "type": "block"
+    },
+    "condition": {
+      "urlFilter": "||surveymonkey.com^",
+      "resourceTypes": [
+        "script",
+        "image",
+        "xmlhttprequest",
+        "ping",
+        "sub_frame",
+        "other"
+      ]
+    }
+  },
+  {
+    "id": 38,
+    "priority": 1,
+    "action": {
+      "type": "block"
+    },
+    "condition": {
+      "urlFilter": "||optimizely.com^",
+      "resourceTypes": [
+        "script",
+        "image",
+        "xmlhttprequest",
+        "ping",
+        "sub_frame",
+        "other"
+      ]
+    }
+  },
+  {
+    "id": 39,
+    "priority": 1,
+    "action": {
+      "type": "block"
+    },
+    "condition": {
+      "urlFilter": "||vwo.com^",
+      "resourceTypes": [
+        "script",
+        "image",
+        "xmlhttprequest",
+        "ping",
+        "sub_frame",
+        "other"
+      ]
+    }
+  },
+  {
+    "id": 40,
+    "priority": 1,
+    "action": {
+      "type": "block"
+    },
+    "condition": {
+      "urlFilter": "||abtasty.com^",
+      "resourceTypes": [
+        "script",
+        "image",
+        "xmlhttprequest",
+        "ping",
+        "sub_frame",
+        "other"
+      ]
+    }
+  },
+  {
+    "id": 41,
+    "priority": 1,
+    "action": {
+      "type": "block"
+    },
+    "condition": {
+      "urlFilter": "||kameleoon.com^",
+      "resourceTypes": [
+        "script",
+        "image",
+        "xmlhttprequest",
+        "ping",
+        "sub_frame",
+        "other"
+      ]
+    }
+  },
+  {
+    "id": 42,
+    "priority": 1,
+    "action": {
+      "type": "block"
+    },
+    "condition": {
+      "urlFilter": "||launchdarkly.com^",
+      "resourceTypes": [
+        "script",
+        "image",
+        "xmlhttprequest",
+        "ping",
+        "sub_frame",
+        "other"
+      ]
+    }
+  },
+  {
+    "id": 43,
+    "priority": 1,
+    "action": {
+      "type": "block"
+    },
+    "condition": {
+      "urlFilter": "||split.io^",
+      "resourceTypes": [
+        "script",
+        "image",
+        "xmlhttprequest",
+        "ping",
+        "sub_frame",
+        "other"
+      ]
+    }
+  },
+  {
+    "id": 44,
+    "priority": 1,
+    "action": {
+      "type": "block"
+    },
+    "condition": {
+      "urlFilter": "||statsig.com^",
+      "resourceTypes": [
+        "script",
+        "image",
+        "xmlhttprequest",
+        "ping",
+        "sub_frame",
+        "other"
+      ]
+    }
+  },
+  {
+    "id": 45,
+    "priority": 1,
+    "action": {
+      "type": "block"
+    },
+    "condition": {
+      "urlFilter": "||growthbook.io^",
+      "resourceTypes": [
+        "script",
+        "image",
+        "xmlhttprequest",
+        "ping",
+        "sub_frame",
+        "other"
+      ]
+    }
+  },
+  {
+    "id": 46,
+    "priority": 1,
+    "action": {
+      "type": "block"
+    },
+    "condition": {
+      "urlFilter": "||contentsquare.net^",
+      "resourceTypes": [
+        "script",
+        "image",
+        "xmlhttprequest",
+        "ping",
+        "sub_frame",
+        "other"
+      ]
+    }
+  },
+  {
+    "id": 47,
+    "priority": 1,
+    "action": {
+      "type": "block"
+    },
+    "condition": {
+      "urlFilter": "||decibelinsight.net^",
+      "resourceTypes": [
+        "script",
+        "image",
+        "xmlhttprequest",
+        "ping",
+        "sub_frame",
+        "other"
+      ]
+    }
+  },
+  {
+    "id": 48,
+    "priority": 1,
+    "action": {
+      "type": "block"
+    },
+    "condition": {
+      "urlFilter": "||userzoom.com^",
+      "resourceTypes": [
+        "script",
+        "image",
+        "xmlhttprequest",
+        "ping",
+        "sub_frame",
+        "other"
+      ]
+    }
+  },
+  {
+    "id": 49,
+    "priority": 1,
+    "action": {
+      "type": "block"
+    },
+    "condition": {
+      "urlFilter": "||glassbox.com^",
+      "resourceTypes": [
+        "script",
+        "image",
+        "xmlhttprequest",
+        "ping",
+        "sub_frame",
+        "other"
+      ]
+    }
+  }
+]
