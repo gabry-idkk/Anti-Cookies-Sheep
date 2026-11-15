@@ -1,0 +1,17 @@
+{
+  "name": "anti-cookies-sheep",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Estensione Chrome/Chromium che blocca cookie, tracker, fingerprinting e telemetria su tutti i siti.",
+  "license": "MIT",
+  "scripts": {
+    "icons": "node tools/make-icons.cjs",
+    "verify": "node tools/verify.cjs",
+    "zip": "node tools/zip.cjs"
+  },
+  "keywords": ["chrome-extension", "privacy", "cookies", "tracking-protection", "manifest-v3", "fingerprinting"],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/gabry-idkk/Anti-Cookies-Sheep.git"
+  }
+}
